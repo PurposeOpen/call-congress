@@ -1,7 +1,7 @@
 var CONGRESS_URL = 'https://congress.api.sunlightfoundation.com',
     API_KEY = '8d0caa0295254038a5b61878a06d80ec',
     campaignId = 'default',
-    callServer = 'https://b0ee4833.ngrok.io';
+    callServer = 'https://021588df.ngrok.io/';
     // 'https://call.taskforce.is/';
 
 var BAD_TWITTER_HANDLES = [
@@ -101,10 +101,8 @@ $(function () {
   // on click of call member button
   $('body').on('click', '.caller-button-legislator', function (ev) {
     ev.preventDefault();
-    var repId = $(ev.currentTarget).data('bioguide_id'),
+    var repId = $(ev.currentTarget).parents('.leg-row').data('bio-id'),
         user_phone_number = $('.user-phone-number').val();
-
-    //alert(user_phone_number);
 
     $.ajax({
         url: callServer + 'create',
