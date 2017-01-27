@@ -1,7 +1,7 @@
 var CONGRESS_URL = 'https://congress.api.sunlightfoundation.com',
     API_KEY = '8d0caa0295254038a5b61878a06d80ec',
-    campaignId = 'defund-the-nsa',
-    callServer = '/';
+    campaignId = 'default',
+    callServer = 'https://874ec71c.ngrok.io/';
     // 'https://call.taskforce.is/';
 
 var BAD_TWITTER_HANDLES = [
@@ -12,7 +12,7 @@ var BAD_TWITTER_HANDLES = [
 ];
 
 function getLegislators(zip, cb) {
-  $.getJSON(CONGRESS_URL + '/legislators/locate?apikey=' + API_KEY + '&zip=' +
+  $.getJSON(CONGRESS_URL + '/legislators/locate?zip=' +
     zip, function (legislators) {
     cb(legislators.results);
   });
@@ -96,8 +96,8 @@ $(function () {
 
     console.log(yes, no.length);
   });
-  
-  
+
+
   // on click of call member button
   $('body').on('click', '.caller-button-legislator', function (ev) {
     ev.preventDefault();
@@ -110,16 +110,16 @@ $(function () {
         url: callServer + 'create',
         type: 'POST',
         data: {
-            campaignId: campaignId, 
-            repIds: repId, 
+            campaignId: campaignId,
+            repIds: repId,
             userPhone: user_phone_number}
     }).done(function(data){
       console.log(data);
     }).fail(function(data){
       console.log(data);
     });
-  }); 
-  
+  });
+
   // on click of a general call button (no congress member info)
   $('body').on('click', '.caller-button-general', function (ev) {
     ev.preventDefault();
@@ -128,7 +128,7 @@ $(function () {
         url: callServer + 'create',
         type: 'POST',
         data: {
-            campaignId: campaignId, 
+            campaignId: campaignId,
             userPhone: user_phone_number}
     }).done(function(data){
       console.log(data);
