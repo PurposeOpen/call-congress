@@ -10,7 +10,7 @@ class Config(object):
 
     SQLALCHEMY_DATABASE_URI = 'sqlite:///dev.db'
 
-    APPLICATION_ROOT = 'http://1cf55a5a.ngrok.com'
+    APPLICATION_ROOT = os.environ.get('APPLICATION_ROOT')
 
     TW_CLIENT = twilio.rest.TwilioRestClient(
         os.environ.get('TWILIO_DEV_ACCOUNT_SID'),

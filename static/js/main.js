@@ -1,7 +1,7 @@
 var CONGRESS_URL = 'https://congress.api.sunlightfoundation.com',
     API_KEY = '8d0caa0295254038a5b61878a06d80ec',
     campaignId = 'default',
-    callServer = 'https://874ec71c.ngrok.io/';
+    callServer = 'https://b0ee4833.ngrok.io';
     // 'https://call.taskforce.is/';
 
 var BAD_TWITTER_HANDLES = [
@@ -104,7 +104,7 @@ $(function () {
     var repId = $(ev.currentTarget).data('bioguide_id'),
         user_phone_number = $('.user-phone-number').val();
 
-    alert(user_phone_number);
+    //alert(user_phone_number);
 
     $.ajax({
         url: callServer + 'create',

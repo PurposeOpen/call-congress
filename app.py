@@ -36,9 +36,6 @@ db.init_app(app)
 # Optional Redis cache, for caching Google spreadsheet campaign overrides
 cache_handler = CacheHandler(app.config['REDIS_URL'])
 
-# FFTF Leaderboard handler. Only used if FFTF Leadboard params are passed in
-leaderboard = FFTFLeaderboard(app.debug, app.config['FFTF_LB_ASYNC_POOL_SIZE'])
-
 call_methods = ['GET', 'POST']
 
 data = PoliticalData(cache_handler, app.debug)
@@ -73,12 +70,6 @@ def parse_params(r):
         'campaignId': r.values.get('campaignId', 'default'),
         'zipcode': r.values.get('zipcode', None),
         'repIds': r.values.getlist('repIds'),
-
-        # optional values for Fight for the Future Leaderboards
-        # if present, these add extra logging functionality in call_complete
-        'fftfCampaign': r.values.get('fftfCampaign'),
-        'fftfReferer': r.values.get('fftfReferer'),
-        'fftfSession': r.values.get('fftfSession')
     }
 
     # lookup campaign by ID
@@ -181,7 +172,7 @@ def call_user():
             to=params['userPhone'],
             from_=random.choice(campaign['numbers']),
             url=full_url_for("connection", **params),
-            if_machine='Hangup' if campaign.get('call_human_check') else None, 
+            if_machine='Hangup' if campaign.get('call_human_check') else None,
             timeLimit=app.config['TW_TIME_LIMIT'],
             timeout=app.config['TW_TIMEOUT'],
             status_callback=full_url_for("call_complete_status", **params))
@@ -221,7 +212,7 @@ def connection():
 
         if campaign.get('skip_star_confirm'):
             resp.redirect(url_for('_make_calls', **params))
-            
+
             return str(resp)
 
         action = url_for("_make_calls", **params)
@@ -296,7 +287,7 @@ def make_single_call():
     params['call_index'] = i
 
     if "SPECIAL_CALL_" in params['repIds'][i]:
-        
+
         special = json.loads(params['repIds'][i].replace("SPECIAL_CALL_", ""))
         to_phone = special['number']
         full_name = special['name']
