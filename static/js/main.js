@@ -1,7 +1,7 @@
 var CONGRESS_URL = 'https://congress.api.sunlightfoundation.com',
     API_KEY = '8d0caa0295254038a5b61878a06d80ec',
     campaignId = 'default',
-    callServer = 'https://021588df.ngrok.io/';
+    callServer = 'http://39648aa5.ngrok.io/';
     // 'https://call.taskforce.is/';
 
 var BAD_TWITTER_HANDLES = [
