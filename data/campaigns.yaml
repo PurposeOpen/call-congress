@@ -4,7 +4,7 @@
   target_house: true
   target_senate: true
   target_house_first: false
-  msg_intro: Hi Purpose. Welcome to call congress.
+  msg_intro: What's up Purpose Campaigns. Welcome to call congress.
   msg_intro_confirm: Press star to start.
   msg_ask_zip: >
     Please enter your zip code so we can lookup your Congress person.
